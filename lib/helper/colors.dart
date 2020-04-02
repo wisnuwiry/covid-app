@@ -1,0 +1,6 @@
+const int PRIMARY_COLOR = 0xFF436DFF;
+
+// Theme Dark
+const int BACKGROUND_COLOR_DARK = 0xFF1A1B25;
+const int CARD_COLOR_DARK = 0xFF242535;
+const int CANVAS_COLOR_DARK = 0xFF15161E;
