@@ -1,6 +1,7 @@
+import 'package:covid19/helper/helpers.dart';
 import 'package:flutter/material.dart';
 
-class BottomNav extends StatelessWidget {
+class BottomNav extends StatefulWidget {
   final List<BottomNavigationBarItem> items;
   final Function(int) onTap;
   final int currentIndex;
@@ -10,23 +11,28 @@ class BottomNav extends StatelessWidget {
       : super(key: key);
 
   @override
+  _BottomNavState createState() => _BottomNavState();
+}
+
+class _BottomNavState extends State<BottomNav> {
+  @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.symmetric(vertical: 16),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
-        color: Theme.of(context).canvasColor,
-      ),
-      child: BottomNavigationBar(
-        showSelectedLabels: false,
-        showUnselectedLabels: false,       
-        type: BottomNavigationBarType.fixed,
-        unselectedItemColor: Color(0xFF212736),
-        selectedItemColor: Color(0xFF374664),
-        items: items,
-        onTap: onTap,
-        elevation: 0,
-        currentIndex: currentIndex,
+    return ClipRRect(
+      borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+      child: SizedBox(
+        height: 70,
+        child: BottomNavigationBar(
+          showSelectedLabels: false,
+          showUnselectedLabels: false,
+          type: BottomNavigationBarType.fixed,
+          unselectedItemColor: Color(PRIMARY_COLOR_SECOND).withOpacity(0.3),
+          selectedItemColor: Color(PRIMARY_COLOR_SECOND),
+          items: widget.items,
+          onTap: widget.onTap,
+          elevation: 0,
+          currentIndex: widget.currentIndex,
+          iconSize: 20,
+        ),
       ),
     );
   }

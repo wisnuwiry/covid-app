@@ -1,94 +1,55 @@
 import 'dart:convert';
 
-NewsData newsDataFromJson(String str) => NewsData.fromJson(json.decode(str));
+import '../pagination.dart';
 
-String newsDataToJson(NewsData data) => json.encode(data.toJson());
+ListNewsModel listNewsModelFromJson(String str) => ListNewsModel.fromJson(json.decode(str));
 
-class NewsData {
-  String status;
-  int totalResults;
-  List<Article> articles;
+String listNewsModelToJson(ListNewsModel data) => json.encode(data.toJson());
 
-  NewsData({
-    this.status,
-    this.totalResults,
-    this.articles,
-  });
+class ListNewsModel {
+    String status;
+    List<NewsModel> data;
+    Pagination pagination;
 
-  factory NewsData.fromJson(Map<String, dynamic> json) => NewsData(
+    ListNewsModel({
+        this.status,
+        this.data,
+        this.pagination,
+    });
+
+    factory ListNewsModel.fromJson(Map<String, dynamic> json) => ListNewsModel(
         status: json["status"],
-        totalResults: json["totalResults"],
-        articles: List<Article>.from(
-            json["articles"].map((x) => Article.fromJson(x))),
-      );
+        data: List<NewsModel>.from(json["data"].map((x) => NewsModel.fromJson(x))),
+        pagination: Pagination.fromJson(json["pages"]),
+    );
 
-  Map<String, dynamic> toJson() => {
+    Map<String, dynamic> toJson() => {
         "status": status,
-        "totalResults": totalResults,
-        "articles": List<dynamic>.from(articles.map((x) => x.toJson())),
-      };
+        "data": List<dynamic>.from(data.map((x) => x.toJson())),
+        "pages": pagination.toJson(),
+    };
 }
 
-class Article {
-  Source source;
-  String author;
-  String title;
-  String description;
-  String url;
-  String urlToImage;
-  DateTime publishedAt;
-  String content;
+class NewsModel {
+    int id;
+    String title;
+    String description;
 
-  Article({
-    this.source,
-    this.author,
-    this.title,
-    this.description,
-    this.url,
-    this.urlToImage,
-    this.publishedAt,
-    this.content,
-  });
+    NewsModel({
+        this.id,
+        this.title,
+        this.description,
+    });
 
-  factory Article.fromJson(Map<String, dynamic> json) => Article(
-        source: Source.fromJson(json["source"]),
-        author: json["author"] == null ? null : json["author"],
+    factory NewsModel.fromJson(Map<String, dynamic> json) => NewsModel(
+        id: json["id"],
         title: json["title"],
         description: json["description"],
-        url: json["url"],
-        urlToImage: json["urlToImage"],
-        publishedAt: DateTime.parse(json["publishedAt"]),
-        content: json["content"] == null ? null : json["content"],
-      );
+    );
 
-  Map<String, dynamic> toJson() => {
-        "source": source.toJson(),
-        "author": author == null ? null : author,
+    Map<String, dynamic> toJson() => {
+        "id": id,
         "title": title,
         "description": description,
-        "url": url,
-        "urlToImage": urlToImage,
-        "publishedAt": publishedAt.toIso8601String(),
-        "content": content == null ? null : content,
-      };
-}
-
-class Source {
-  dynamic id;
-  String name;
-
-  Source({
-    this.id,
-    this.name,
-  });
-
-  factory Source.fromJson(Map<String, dynamic> json) => Source(
-        id: json["id"],
-        name: json["name"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "name": name,
-      };
+    };
 }

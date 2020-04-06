@@ -9,7 +9,7 @@ class PageTransition extends PageRouteBuilder {
                 Animation<double> secondAnimation) {
               return child;
             },
-            transitionDuration: Duration(milliseconds: 500),
+            transitionDuration: Duration(milliseconds: 300),
             transitionsBuilder: (_, Animation<double> animation,
                 Animation<double> secondAnimation, Widget child) {
               return SlideTransition(

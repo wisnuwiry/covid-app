@@ -7,17 +7,10 @@ abstract class BottomNavState extends Equatable {
   List<Object> get props => [];
 }
 
-class CurrentIndexChangedState extends BottomNavState {
-  final int currentIndex;
-  CurrentIndexChangedState({@required this.currentIndex});
-}
+class HomePageState extends BottomNavState {}
 
-class PageLoadingState extends BottomNavState {}
+class StatisticPageState extends BottomNavState {}
 
-class HomePageLoadedState extends BottomNavState {}
+class FaqPageState extends BottomNavState {}
 
-class InfoPageLoadedState extends BottomNavState {}
-
-class NewsPageLoadedState extends BottomNavState {}
-
-class ContactPageLoadedState extends BottomNavState {}
+class ContactPageState extends BottomNavState {}
